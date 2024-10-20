@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>FreePharmacy - Medicine Tracker</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- owl stylesheets -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 20px;
+        }
+
+        .tracker {
+            width: 60%;
+            padding: 20px;
+            background-color: #cfedf0;;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar {
+            width: 35%;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: #cfedf0;;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .medication-list {
+            margin-top: 20px;
+        }
+
+        .medication-item {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .medication-item button {
+            background-color: #f44336;
+            border: none;
+            color: rgb(255, 255, 255);
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .medication-item button:hover {
+            background-color: #e53935;
+        }
+
+        .highlight {
+            background-color: #cfedf0;;
+        }
+
+        .calendar-day {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            margin: 2px;
+            cursor: pointer;
+            position: relative;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .calendar-day:hover {
+            background-color: #c3f2f9;
+        }
+
+        #reminder-alert,
+        #interaction-warning {
+            margin: 20px 0;
+            display: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #reminder-alert {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        #interaction-warning {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+
+        .drug-warning {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #cfedf0;;
+            border-radius: 5px;
+        }
+
+        /* New Styles */
+        .edit-btn {
+            background-color: #ff9800;
+            border: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .edit-btn:hover {
+            background-color: #fb8c00;
+        }
+
+        .health_taital {
+                /* Maintain existing styling (including font size) */
+            }
+            .health_taital span.affordable {
+                color: #17d0c0;
+            }
+
+            .btn-primary {
+    background-color: black; /* Change background to black */
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff; /* Keep text color white for readability */
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #333; /* Darker shade on hover */
+}
+    </style>
+</head>
+
+<body>
+    <!-- header section start -->
+    <div class="header_section">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="logo"><a href="index.html"><img width="48" height="48" src="https://img.icons8.com/doodle/48/clinic.png" alt="clinic" /></a></div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="health.html">Finders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="medicine.html">Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="calculuaotr1.html">Calculate</a>
+                    </li>
+                    <li class="nav-item">
+                     <a class="nav-link" href="systemchecker.html">Symptoms</a>
+                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Learn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="app.html">Mobile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Join</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><img src="images/search-icon.png"></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- header section end -->
+
+    <div class="container">
+        <div class="tracker">
+            <h1 class="health_taital">
+                <span class="affordable">Medicine</span>Tracker
+            </h1>
+            <form id="medicationForm">
+                <div class="form-group">
+                    <input type="text" id="medicineName" class="form-control" placeholder="Medicine Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="dosage" class="form-control" placeholder="Dosage (e.g., 2 pills)" required>
+                </div>
+                <div class="form-group">
+                    <input type="time" id="time" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Medication</button>
+            </form>
+
+            <div id="interaction-warning"></div>
+            <div id="medicationList" class="medication-list mt-3"></div>
+            <div id="reminder-alert"></div>
+        </div>
+
+        <div id="calendar" class="calendar">
+            <h2>Calendar</h2>
+        </div>
+    </div>
+
+    <div class="drug-warning" id="drugWarnings" style="display: none;">
+        <strong>Drug Interactions Warning:</strong>
+        <p id="drugInteractionList"></p>
+    </div>
+
+    <script>
+         document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('medicationForm');
+    const medicineNameInput = document.getElementById('medicineName');
+    const dosageInput = document.getElementById('dosage');
+    const timeInput = document.getElementById('time');
+    const dateInput = document.getElementById('date');
+    const medicationList = document.getElementById('medicationList');
+    const calendar = document.getElementById('calendar');
+    const alertDiv = document.getElementById('reminder-alert');
+    const interactionWarning = document.getElementById('interaction-warning');
+    const drugWarningsDiv = document.getElementById('drugWarnings');
+    const drugInteractionList = document.getElementById('drugInteractionList');
+
+    let medications = JSON.parse(localStorage.getItem('medications')) || [];
+
+    // Sample drug interactions
+    const drugInteractions = {
+        "Aspirin": ["Ibuprofen", "Warfarin"],
+        "Ibuprofen": ["Aspirin", "Naproxen"],
+        "Warfarin": ["Aspirin"],
+        // Add more interactions as needed
+    };
+
+    // Render medications in the list
+    function renderMedications() {
+        medicationList.innerHTML = '';
+        medications.forEach((med, index) => {
+            const item = document.createElement('div');
+            item.className = 'medication-item';
+            item.innerHTML = `
+                <span>${med.name} - ${med.dosage} at ${med.time} on ${med.date}</span>
+                <button onclick="removeMedication(${index})">Remove</button>
+                <button class="edit-btn" onclick="editMedication(${index})">Edit</button>
+            `;
+            medicationList.appendChild(item);
+        });
+        checkForInteractions();
+        localStorage.setItem('medications', JSON.stringify(medications));
+    }
+
+    // Function to add medication
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newMedication = {
+            name: medicineNameInput.value,
+            dosage: dosageInput.value,
+            time: timeInput.value,
+            date: dateInput.value,
+        };
+
+        medications.push(newMedication);
+        renderMedications();
+        medicineNameInput.value = '';
+        dosageInput.value = '';
+        timeInput.value = '';
+        dateInput.value = '';
+        setNotification(newMedication);
+    });
+
+    // Function to remove medication
+    window.removeMedication = (index) => {
+        medications.splice(index, 1);
+        renderMedications();
+    };
+
+    // Function to edit medication
+    window.editMedication = (index) => {
+        const med = medications[index];
+        medicineNameInput.value = med.name;
+        dosageInput.value = med.dosage;
+        timeInput.value = med.time;
+        dateInput.value = med.date;
+        removeMedication(index); // Remove the original before adding the updated one
+    };
+
+    // Check for drug interactions
+    function checkForInteractions() {
+        interactionWarning.style.display = 'none';
+        drugWarningsDiv.style.display = 'none';
+        const warningDrugs = [];
+
+        medications.forEach(med => {
+            const interactions = drugInteractions[med.name];
+            if (interactions) {
+                warningDrugs.push(...interactions);
+            }
+        });
+
+        if (warningDrugs.length > 0) {
+            interactionWarning.style.display = 'block';
+            interactionWarning.innerHTML = '<strong>Warning:</strong> Possible drug interactions detected!';
+            drugWarningsDiv.style.display = 'block';
+            drugInteractionList.innerHTML = Array.from(new Set(warningDrugs)).join(', ');
+        }
+    }
+
+    // Function to create the calendar
+    function createCalendar() {
+        const date = new Date();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+
+        calendar.innerHTML = `<h2>${date.toLocaleString('default', { month: 'long' })} ${year}</h2>`;
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        const calendarGrid = document.createElement('div');
+        calendarGrid.style.display = 'grid';
+        calendarGrid.style.gridTemplateColumns = 'repeat(7, 1fr)';
+        calendarGrid.style.gap = '5px';
+        calendarGrid.style.marginTop = '10px';
+
+        for (let i = 0; i < firstDay; i++) {
+            const emptyCell = document.createElement('div');
+            calendarGrid.appendChild(emptyCell);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayCell = document.createElement('div');
+            dayCell.className = 'calendar-day';
+            dayCell.innerText = day;
+
+            // Highlight days with medications
+            medications.forEach(med => {
+                const medDate = new Date(med.date);
+                if (medDate.getDate() === day && medDate.getMonth() === month && medDate.getFullYear() === year) {
+                    dayCell.classList.add('highlight');
+                }
+            });
+
+            calendarGrid.appendChild(dayCell);
+        }
+
+        calendar.appendChild(calendarGrid);
+    }
+
+    // Function to set notifications for medications
+    function setNotification(med) {
+        const medTime = new Date(`${med.date}T${med.time}`);
+        const currentTime = new Date();
+
+        if (medTime > currentTime) {
+            const timeout = medTime - currentTime;
+            setTimeout(() => {
+                alert(`Time to take your medication: ${med.name}`);
+                playNotificationSound(); // Play sound notification
+                // Optionally, you can use Notification API for browser notifications
+                if (Notification.permission === 'granted') {
+                    new Notification(`Time to take your medication: ${med.name}`);
+                }
+            }, timeout);
+        }
+    }
+
+    function playNotificationSound() {
+    const audio = new Audio('japen-eas-alarm-1945-249123.mp3'); // Ensure this path is correct
+    audio.play().catch((error) => {
+        console.error("Error playing sound:", error);
+    });
+}
+
+    createCalendar();
+    renderMedications();
+
+    // Request Notification permission
+    if (Notification.permission !== "granted") {
+        Notification.requestPermission();
+    }
+});
+  
+    </script>
+
+    
+   <!-- footer section start -->
+   <div class="footer_section layout_padding">
+    <div class="container">
+       <div class="row">
+          <div class="col-lg-3 col-sm-6">
+             <div class="footer_logo"><a href="index.html"><img width="48" height="48" src="https://img.icons8.com/doodle/48/clinic.png" alt="clinic"/>
+             </a></div>
+             <h1 class="adderss_text">Contact Me for any Inquiries</h1>
+             <div class="map_icon"><img src="images/mail-icon.png"><span class="paddlin_left_0">majicsrn@gmail.com</span></div>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+             <div class="hiphop_text_1">Access to healthcare is a serious problem and to solve it, we need YOU. Your help can impact us deeply and with your help we can make a difference into allowing access to health care to all ages.  </div>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+             <h1 class="adderss_text"></h1>
+             <div class="Useful_text"></div>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+             <h1 class="adderss_text"></h1>
+             <input type="text" class="Enter_text" placeholder="Enter your Emil" name="Enter your Emil">
+             <div class="subscribe_bt"><a href="#">Login</a></div>
+             <div class="social_icon">
+                <ul>
+                </ul>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <!-- footer section end -->
+ <!-- copyright section start -->
+ <div class="copyright_section">
+    <div class="container">
+       <p class="copyright_text">2024 All Rights Reserved. <a href="https://html.design">Majella Rajan</a></p>
+    </div>
+ </div>
+ <!-- copyright section end -->
+ <!-- Javascript files-->
+ <script src="js/jquery.min.js"></script>
+ <script src="js/popper.min.js"></script>
+ <script src="js/bootstrap.bundle.min.js"></script>
+ <script src="js/jquery-3.0.0.min.js"></script>
+ <script src="js/plugin.js"></script>
+ <!-- sidebar -->
+ <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+ <script src="js/custom.js"></script>
+ <!-- javascript -->
+ <script src="js/owl.carousel.js"></script>
+ <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>App</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" href="css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <!-- owl stylesheets --> 
+      <link rel="stylesheet" href="css/owl.carousel.min.css">
+      <link rel="stylesheet" href="css/owl.theme.default.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+   </head>
+   <body>
+      <style>
+         .btn-primary {
+    background-color: black; /* Change background to black */
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff; /* Keep text color white for readability */
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #333; /* Darker shade on hover */
+}
+      </style>
+      <!-- header section start -->
+      <!-- header section start -->
+   <div class="header_section">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <div class="logo"><a href="index.html"><img width="48" height="48" src="https://img.icons8.com/doodle/48/clinic.png" alt="clinic"/></a></div>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+                   <a class="nav-link" href="index.html">Home</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="health.html">Finders</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="medicine.html">Tracker</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="calculuaotr1.html">Calculate</a>
+               </li>
+               <li class="nav-item">
+                <a class="nav-link" href="systemchecker.html">Symptoms</a>
+                </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="contact.html">Learn</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="app.html">Mobile</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="login.html">Join</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="#"><img src="images/search-icon.png"></a>
+               </li>
+           </ul>
+         </div>
+      </nav>
+
+ <!-- FreePharmacy Mobile Version section start -->
+<div class="client_section layout_padding margin_90" style="background-color: #ffffff; padding: 60px 40px;">
+   <div class="container">
+      <!-- Animation for title and description -->
+      <div class="text-center animate-fade-in" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+         <!-- Images moved to either side of the title -->
+         <div style="flex-grow: 1; text-align: center;">
+            <h1 class="client_taital" style="font-size: 3.2em; color: #000;">
+               <span style="color: #000;">Body Mass Index (BMI) </span> 
+               <span style="color: #1becde;">Calculator</span> 
+           </h1>
+           
+            <p class="client_text" style="font-size: 1.2em; color: #333;">       The FreePharmacy mobile app offers easy access to healthcare services, insurance information, and personalized health tips—all at your fingertips. Our user-friendly platform makes it easier to manage your health on-the-go.       </p>
+         </div>         
+      </div>
+
+      <div class="container">
+         <div class="tracker">
+             <form id="bmiForm">
+                 <div class="form-group">
+                     <label for="weight">Weight (kg)</label>
+                     <input type="number" id="weight" class="form-control" placeholder="Enter your weight in kilograms" required>
+                 </div>
+                 <div class="form-group">
+                     <label for="height">Height (cm)</label>
+                     <input type="number" id="height" class="form-control" placeholder="Enter your height in centimeters" required>
+                 </div>
+                 <button type="submit" class="btn btn-primary">Calculate BMI</button>
+             </form>
+
+             <div id="bmiResult" class="bmi-result alert alert-info mt-3" role="alert"></div>
+         </div>
+
+         <div class="calendar">
+             <h2>BMI History</h2>
+             <div id="bmiHistory" class="history-list">
+                 <!-- History records will be dynamically added here -->
+             </div>
+         </div>
+     </div>
+
+     <!-- Javascript for BMI Calculator -->
+     <script>
+         document.addEventListener('DOMContentLoaded', () => {
+             const form = document.getElementById('bmiForm');
+             const weightInput = document.getElementById('weight');
+             const heightInput = document.getElementById('height');
+             const bmiResultDiv = document.getElementById('bmiResult');
+             const bmiHistoryDiv = document.getElementById('bmiHistory');
+
+             let bmiHistory = JSON.parse(localStorage.getItem('bmiHistory')) || [];
+
+             // Function to calculate BMI
+             form.addEventListener('submit', (e) => {
+                 e.preventDefault();
+                 const weight = parseFloat(weightInput.value);
+                 const height = parseFloat(heightInput.value) / 100; // Convert height to meters
+                 const bmi = (weight / (height * height)).toFixed(2);
+
+                 let classification = '';
+                 if (bmi < 18.5) {
+                     classification = 'Underweight';
+                 } else if (bmi >= 18.5 && bmi < 24.9) {
+                     classification = 'Normal weight';
+                 } else if (bmi >= 25 && bmi < 29.9) {
+                     classification = 'Overweight';
+                 } else {
+                     classification = 'Obese';
+                 }
+
+                 const result = `Your BMI is ${bmi} (${classification})`;
+                 bmiResultDiv.innerHTML = `<p><strong>${result}</strong></p>`;
+                 bmiResultDiv.style.display = 'block';
+
+                 // Save BMI result to history
+                 const bmiRecord = {
+                     date: new Date().toLocaleDateString(),
+                     bmi: bmi,
+                     classification: classification
+                 };
+
+                 bmiHistory.push(bmiRecord);
+                 localStorage.setItem('bmiHistory', JSON.stringify(bmiHistory));
+
+                 displayBmiHistory();
+             });
+
+             // Function to display BMI history
+             function displayBmiHistory() {
+                 bmiHistoryDiv.innerHTML = '';
+                 if (bmiHistory.length === 0) {
+                     bmiHistoryDiv.innerHTML = '<p>No BMI records yet.</p>';
+                     return;
+                 }
+
+bmiHistory.forEach((record, index) => {
+ const historyItem = document.createElement('div');
+ historyItem.classList.add('medication-item');
+ historyItem.innerHTML = `
+     <span>${record.date} - BMI: ${record.bmi} (${record.classification})</span>
+     <button class="delete-btn" data-index="${index}">Delete</button>
+ `;
+
+ // Delete button functionality
+ historyItem.querySelector('.delete-btn').addEventListener('click', (e) => {
+     const recordIndex = e.target.getAttribute('data-index');
+     bmiHistory.splice(recordIndex, 1);
+     localStorage.setItem('bmiHistory', JSON.stringify(bmiHistory));
+     displayBmiHistory();
+ });
+
+ bmiHistoryDiv.appendChild(historyItem);
+});
+}
+
+// Initial display of BMI history
+displayBmiHistory();
+});
+</script>
+
+<!-- Bootstrap JS -->
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

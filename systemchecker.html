@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>App</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" href="css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <!-- owl stylesheets --> 
+      <link rel="stylesheet" href="css/owl.carousel.min.css">
+      <link rel="stylesheet" href="css/owl.theme.default.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+   </head>
+   <body>
+      <!-- header section start -->
+      <!-- header section start -->
+   <div class="header_section">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <div class="logo"><a href="index.html"><img width="48" height="48" src="https://img.icons8.com/doodle/48/clinic.png" alt="clinic"/></a></div>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+                   <a class="nav-link" href="index.html">Home</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="health.html">Finders</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="medicine.html">Tracker</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="calculuaotr1.html">Calculate</a>
+               </li>
+               <li class="nav-item">
+                <a class="nav-link" href="systemchecker.html">Symptoms</a>
+                </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="contact.html">Learn</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="app.html">Mobile</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="login.html">Join</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="#"><img src="images/search-icon.png"></a>
+               </li>
+           </ul>
+         </div>
+      </nav>
+
+ <!-- FreePharmacy Mobile Version section start -->
+<div class="client_section layout_padding margin_90" style="background-color: #ffffff; padding: 60px 40px;">
+   <div class="container">
+      <!-- Animation for title and description -->
+      <div class="text-center animate-fade-in" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+         <!-- Images moved to either side of the title -->
+         <div style="flex-grow: 1; text-align: center;">
+            <h1 class="client_taital" style="font-size: 3.2em; color: #000;">
+               <span style="color: #000;">Symptom</span> 
+               <span style="color: #1becde;">Checker</span> 
+           </h1>
+           
+            <p class="client_text" style="font-size: 1.2em; color: #000000;">       
+                The FreePharmacy Symptom Checker provides you with quick access to healthcare insights right from your mobile device. Simply enter your symptoms, and receive tailored medication suggestions, potential conditions, and helpful health tips—ensuring you have the information you need at your fingertips. Our intuitive platform makes it effortless to manage your health on-the-go, empowering you to make informed decisions about your well-being.
+            </p>
+         </div>         
+      </div>
+
+
+    <div class="symptom-checker-form">
+        <form id="symptomForm" class="mb-4">
+            <div class="form-group">
+                <input type="text" id="symptomsInput" class="form-control" placeholder="Enter your symptoms separated by commas" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="transition: background-color 0.3s; cursor: pointer;">
+                Check Symptoms
+            </button>
+        </form>
+        <div id="loading" style="display: none; text-align: center;">
+            <div class="spinner" style="margin: 10px auto; width: 30px; height: 30px; border: 4px solid #1becde; border-top: 4px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+            <p>Loading...</p>
+        </div>
+        <div id="prescription" class="medication-list mt-3"></div>
+    </div>
+   
+    <!-- CSS for styling -->
+    <style>
+        /* Loader Spinner Animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+   
+        /* Button Hover Effect */
+        .btn-primary {
+            background-color: #000000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+   
+        .btn-primary:hover {
+            background-color: #17b5c3; /* Darker shade on hover */
+        }
+   
+        /* Input Styling */
+        .form-control {
+            border: 1px solid #000000;
+            border-radius: 5px;
+            padding: 10px;
+            transition: border-color 0.3s;
+        }
+   
+        .form-control:focus {
+            border-color: #1becde;
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+        }
+   
+        /* Medication List Styling */
+        .medication-list {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px #126f69;
+        }
+    </style>
+   
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const symptomForm = document.getElementById('symptomForm');
+        const symptomsInput = document.getElementById('symptomsInput');
+        const prescriptionDiv = document.getElementById('prescription');
+        const loadingDiv = document.getElementById('loading');
+
+        // Medication and conditions suggestions based on symptoms
+        const symptomToMedication = {
+            "cough": {
+                medications: ["Cough Syrup", "Honey", "Guaifenesin"],
+                conditions: {
+                    "Common Cold": "A viral infection that causes nasal congestion, sneezing, and coughing.",
+                    "Flu": "A contagious respiratory illness caused by influenza viruses, leading to fever, body aches, and fatigue.",
+                    "Allergies": "Reactions to allergens, such as pollen or dust, causing sneezing, itching, and coughing."
+                }
+            },
+            "fever": {
+                medications: ["Paracetamol", "Ibuprofen", "Aspirin"],
+                conditions: {
+                    "Flu": "A contagious respiratory illness characterized by high fever and body aches.",
+                    "Infection": "An invasion of the body by harmful pathogens, causing inflammation and fever.",
+                    "Heat Exhaustion": "A heat-related illness caused by excessive loss of water and salt, often leading to high body temperature."
+                }
+            },
+            "headache": {
+                medications: ["Aspirin", "Ibuprofen", "Naproxen"],
+                conditions: {
+                    "Migraine": "A severe, recurring headache often accompanied by nausea and sensitivity to light.",
+                    "Tension Headache": "A common type of headache characterized by a dull, aching pain and tightness around the forehead.",
+                    "Sinusitis": "Inflammation of the sinuses, causing pain and pressure in the face and head."
+                }
+            },
+            "stomach ache": {
+                medications: ["Antacids", "Pepto-Bismol", "Loperamide"],
+                conditions: {
+                    "Gastroenteritis": "An inflammation of the stomach and intestines, leading to diarrhea and vomiting.",
+                    "Indigestion": "Discomfort in the stomach after eating, often resulting in bloating and nausea.",
+                    "Food Poisoning": "Illness caused by consuming contaminated food, leading to stomach pain, diarrhea, and vomiting."
+                }
+            },
+            "nausea": {
+                medications: ["Antiemetics", "Ginger Tea", "Bismuth Subsalicylate"],
+                conditions: {
+                    "Motion Sickness": "Nausea and dizziness caused by motion, such as in a car or boat.",
+                    "Gastroenteritis": "An inflammation of the stomach and intestines, causing nausea and vomiting.",
+                    "Pregnancy": "Nausea experienced during pregnancy, often referred to as morning sickness."
+                }
+            },
+            "cold": {
+                medications: ["Decongestants", "Antihistamines"],
+                conditions: {
+                    "Common Cold": "A viral infection leading to sneezing, sore throat, and nasal congestion.",
+                    "Allergies": "Reactions to allergens causing sneezing, itching, and congestion."
+                }
+            },
+            "sore throat": {
+                medications: ["Throat Lozenges", "Saltwater Gargle"],
+                conditions: {
+                    "Strep Throat": "A bacterial infection causing a severe sore throat, fever, and swollen lymph nodes.",
+                    "Tonsillitis": "Inflammation of the tonsils, leading to a sore throat and difficulty swallowing.",
+                    "Viral Pharyngitis": "A viral infection causing throat inflammation and pain."
+                }
+            },
+            "muscle pain": {
+                medications: ["Acetaminophen", "Massage"],
+                conditions: {
+                    "Strain": "Injury to a muscle or tendon due to overstretching or overexertion.",
+                    "Fibromyalgia": "A chronic condition characterized by widespread muscle pain and fatigue.",
+                    "Chronic Pain": "Persistent pain lasting longer than six months, often with no clear cause."
+                }
+            },
+            // More symptoms can be added here...
+        };
+
+        // Handle symptom checker form submission
+        symptomForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const symptoms = symptomsInput.value.split(',').map(symptom => symptom.trim().toLowerCase());
+
+            // Show loading animation
+            loadingDiv.style.display = 'block';
+            prescriptionDiv.innerHTML = ''; // Clear previous results
+
+            setTimeout(() => { // Simulate loading time
+                const medications = new Set();
+                const conditions = new Set();
+                let unrecognizedSymptoms = [];
+                let conditionDescriptions = [];
+
+                symptoms.forEach(symptom => {
+                    if (symptomToMedication[symptom]) {
+                        symptomToMedication[symptom].medications.forEach(med => medications.add(med));
+                        for (const [condition, description] of Object.entries(symptomToMedication[symptom].conditions)) {
+                            conditions.add(condition);
+                            conditionDescriptions.push(`<strong>${condition}:</strong> ${description}`);
+                        }
+                    } else {
+                        unrecognizedSymptoms.push(symptom);
+                    }
+                });
+
+                // Display results
+                prescriptionDiv.innerHTML = '<h3>Suggested Medications and Conditions:</h3>';
+                
+                // Display medications if available
+                if (medications.size > 0) {
+                    prescriptionDiv.innerHTML += `<strong>Medications:</strong> <p>${Array.from(medications).join(', ')}</p>`;
+                } else {
+                    prescriptionDiv.innerHTML += '<p>No medication suggestions available for the entered symptoms.</p>';
+                }
+
+                // Display conditions if available
+                if (conditions.size > 0) {
+                    prescriptionDiv.innerHTML += `<strong>Possible Conditions:</strong> <p>${Array.from(conditions).join(', ')}</p>`;
+                    prescriptionDiv.innerHTML += `<strong>Condition Descriptions:</strong> <p>${conditionDescriptions.join('<br>')}</p>`;
+                } else {
+                    prescriptionDiv.innerHTML += '<p>No conditions found for the entered symptoms.</p>';
+                }
+
+                // Display unrecognized symptoms if any
+                if (unrecognizedSymptoms.length > 0) {
+                    prescriptionDiv.innerHTML += `<p style="color: red;">The following symptoms are not recognized: ${unrecognizedSymptoms.join(', ')}. Please check the spelling or try another symptom.</p>`;
+                }
+
+                // Hide loading animation
+                loadingDiv.style.display = 'none';
+
+                // Clear the input
+                symptomsInput.value = '';
+            }, 1000); // Simulated loading delay (1 second)
+        });
+    });
+</script>
